@@ -1,0 +1,29 @@
+
+
+
+body {
+    background: no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+}
+
+#div-top {
+    /* background: blue; */
+    width: 1905px;
+    height: 350px;
+}
+
+#div-middle {
+    /* background: green; */
+    width: 1905px;
+    height: 500px;
+}
+
+#div-bottom {
+    /* background: lightgrey; */
+    width: 1905px;
+    height: 100px;
+}
