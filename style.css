@@ -8,15 +8,23 @@ body {
     -o-background-size: cover;
     background-size: cover;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 0px 0px 20px #aaaaaa;
 }
 
 #div-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     /* background: blue; */
     width: 1905px;
-    height: 350px;
+    height: 300px;
 }
 
 #div-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* background: green; */
     width: 1905px;
     height: 500px;
@@ -27,3 +35,29 @@ body {
     width: 1905px;
     height: 100px;
 }
+
+#crypto-h {
+    padding-left: 40px;
+    margin-bottom: 150px;
+    display: flex;
+    align-items: center;
+    /* border: 2px solid black; */
+
+}
+
+#crypto-h > span {
+    margin-left: 5px;
+}
+
+#weather-h {
+    padding-right: 40px;
+    margin-bottom: 150px;
+}
+
+
+#author-h {
+    margin-left: 40px;
+    margin-top: 80px;
+}
+
+
