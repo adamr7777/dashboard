@@ -22,6 +22,8 @@ const authorH = document.getElementById('author-h');
 const cryptoH = document.getElementById('crypto-h');
 const cryptoDiv = document.getElementById('crypto-div');
 const timeH = document.getElementById('time-h');
+const weatherH = document.getElementById('weather-h');
+const weatherLoc = document.getElementById('weather-loc');
  
 
 
@@ -80,17 +82,17 @@ function showFormHours(hours, minutes) {
 
 
 
-// const intervalId  = setInterval(function() {
-//     const timeObj = new Date(); 
-//     timeH.textContent = showFormHours(timeObj.getHours(), timeObj.getMinutes());
-// }, 1000)
+const intervalId  = setInterval(function() {
+    const timeObj = new Date(); 
+    timeH.textContent = showFormHours(timeObj.getHours(), timeObj.getMinutes());
+}, 1000)
 
 
-navigator.geolocation.getCurrentPosition(position => {getWeather(position)})
+navigator.geolocation.getCurrentPosition(position => {renderWeather(position)})
 
 
 
-function getWeather(position) {
+function renderWeather(position) {
    const lat = position.coords.latitude;
    const lon = position.coords.longitude;
    fetch (`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric`)
@@ -104,7 +106,11 @@ function getWeather(position) {
         
     })
     .then(data => {
-        console.log(data)
+        // console.log(data.main)
+        const temp = Math.round(data.main.temp);
+        const iconString = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        weatherH.innerHTML = `<img src='${iconString}'/><span>${temp}</span>`
+        weatherLoc.textContent = data.name;
     })
     .catch(err => console.error(err));
 }
