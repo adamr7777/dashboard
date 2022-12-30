@@ -9,11 +9,21 @@
 //Crypto: base url: api.coingecko.com/api/v3
 //Crypto: endpoint for current coin info: /coins/{id}
 
+//weather API BaseURL: https://apis.scrimba.com/openweathermap/data/2.5/weather
+
+// weather API queries to include: 
+// *     - lat (latitude)
+// *     - lon (longitude)
+// *     - units (imperial or metric)
+
 //variables
 
 const authorH = document.getElementById('author-h');
 const cryptoH = document.getElementById('crypto-h');
 const cryptoDiv = document.getElementById('crypto-div');
+const timeH = document.getElementById('time-h');
+ 
+
 
 
 
@@ -33,12 +43,12 @@ const cryptoDiv = document.getElementById('crypto-div');
     fetch ('https://api.coingecko.com/api/v3/coins/dogecoin ')
         .then (res => {
             if (!res.ok) {
-                throw error('some error')
+                throw Error('some error')
             }
             return res.json()
         })
         .then (data => {
-            console.log(data.market_data.current_price.usd);
+            //console.log(data.market_data.current_price.usd);
             cryptoH.innerHTML = `<img src='${data.image.small}'/>
                                 <span>${data.name}: ${data.market_data.current_price.usd}</span>`
            
@@ -46,7 +56,57 @@ const cryptoDiv = document.getElementById('crypto-div');
         })
         .catch (err => alert(`${err}, please refresh the page`));
 
-        //data.name
+
 
 
     
+  
+
+function showFormHours(hours, minutes) {
+    let afix = '';
+    if (hours > 12) {
+        afix = 'PM'
+        hours = hours - 12
+    }   
+    else {
+        afix = 'AM'
+    }
+    if (minutes < 10) {
+        minutes = `0${minutes}`
+    }
+    return `${hours}:${minutes} ${afix}`
+}
+
+
+
+
+// const intervalId  = setInterval(function() {
+//     const timeObj = new Date(); 
+//     timeH.textContent = showFormHours(timeObj.getHours(), timeObj.getMinutes());
+// }, 1000)
+
+
+navigator.geolocation.getCurrentPosition(position => {getWeather(position)})
+
+
+
+function getWeather(position) {
+   const lat = position.coords.latitude;
+   const lon = position.coords.longitude;
+   fetch (`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric`)
+    .then(res => {
+        if (!res.ok) {
+            throw Error('weather data is not available')
+        }
+        else {
+            return res.json()
+        }
+        
+    })
+    .then(data => {
+        console.log(data)
+    })
+    .catch(err => console.error(err));
+}
+
+
